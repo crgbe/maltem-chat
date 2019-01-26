@@ -15,6 +15,16 @@ class Kernel extends BaseKernel
 
     const CONFIG_EXTS = '.{php,xml,yaml,yml}';
 
+    public function getCacheDir()
+    {
+        return '/var/cache/maltem-chat';
+    }
+
+    public function getLogDir()
+    {
+        return '/var/log/maltem-chat';
+    }
+
     public function registerBundles()
     {
         $contents = require $this->getProjectDir().'/config/bundles.php';
