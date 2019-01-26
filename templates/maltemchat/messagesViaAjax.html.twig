@@ -1,0 +1,7 @@
+{% for message in messages %}
+    <p>
+        <span><b>{{ message.user.pseudo }}</b></span>:
+        <span>{{ message }}</span>-
+        <span><b>{{ message.createdAt | date('dd/MM/yyyy h:i:s') }}</b></span>
+    </p>
+{% endfor %}

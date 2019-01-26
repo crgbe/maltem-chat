@@ -2,9 +2,11 @@
 
 namespace App\Controller;
 
+use App\Form\LoginType;
 use App\Form\UserType;
 use App\Entity\User;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -13,7 +15,7 @@ class UserController extends AbstractController
     /**
      * @Route("/user/register", name="user_register")
      */
-    public function register(Request $request)
+    public function registerAction(Request $request)
     {
         $user = new User();
         $form = $this->createForm(UserType::class, $user);
@@ -21,16 +23,48 @@ class UserController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->persist($user);
-            $entityManager->flush();
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($user);
+            $em->flush();
 
-            return $this->redirectToRoute('chat_home', [
-                'id' => $user->getId(),
-            ]);
+            $session = new Session();
+            $session->start();
+            $session->set('userId', $user->getId());
+
+            return $this->redirectToRoute('chat_home');
         }
 
         return $this->render('user/register.html.twig', [
+            'form' => $form->createView(),
+        ]);
+    }
+
+
+    /**
+     * @Route("/user/login", name="user_login")
+     */
+    public function loginAction(Request $request)
+    {
+        $form = $this->createForm(LoginType::class);
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $credentials = $form->getData();
+
+            $em = $this->getDoctrine()->getManager();
+            $user = $em->getRepository(User::class)->findBy([
+                'pseudo' => $credentials['pseudo'],
+            ]);
+
+            $session = new Session();
+            $session->start();
+            $session->set('userId', $user['id']);
+
+            return $this->redirectToRoute('chat_home');
+        }
+
+        return $this->render('user/login.html.twig', [
             'form' => $form->createView(),
         ]);
     }
