@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Welcome back to MALTEM CHAT: <span><i>M. Corentin</i></span></h1>
+    <div class='panel panel-primary'>
+        <div class='panel-heading'>
+            <h3 class='panel-title'>Last messages</h3>
+        </div>
+        <div id="ajax-messages" class='panel-body'>
+            {#{% for message in messages %}#}
+                <p>
+                    <span><b>Corentin</b></span>:
+                    <span>Hello everyone</span>-
+                    <span><b>26/01/2019 - 11:46</b></span>
+                </p>
+            {#{% endfor %}#}
+            {#{% for message in messages %}#}
+                {#<p>#}
+                    {#<span><b>{{ user.pseudo }}</b></span>:#}
+                    {#<span>{{ message }}</span>-#}
+                    {#<span><b>{{ message.created_at }}</b></span>#}
+                {#</p>#}
+            {#{% endfor %}#}
+        </div>
+    </div>
+
+    <div class='panel panel-default'>
+        <div class='panel-body'>
+            <form action="{#{{ path('message_submit') }}#}" method='post'>
+                <div class='row'>
+                    <div class='col-md-4'>
+                        <b><i>Corentin:</i></b>
+                        {#<b><i>{{ user.pseudo }}</i></b>#}
+                    </div>
+                    <div class='col-md-8'>
+                        <textarea id="message-box" class='form-control' name='form[message]' placeholder='Enter your message here' rows='5'></textarea>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+{% endblock %}

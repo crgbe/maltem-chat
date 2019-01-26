@@ -16,9 +16,9 @@ use Symfony\Component\Routing\Annotation\Route;
 class ChatController extends AbstractController
 {
     /**
-     * @Route("/")
+     * @Route("/home", name="chat_home")
      */
     public function homeAction(){
-        return $this->render('maltem_chat/home.html.twig');
+        return $this->render('maltemchat/home.html.twig');
     }
 }
