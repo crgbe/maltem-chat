@@ -1,7 +1,7 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1>Welcome back to MALTEM CHAT: <span><i>{{ app.session.user.firstname }}</i></span></h1>
+    <h1>Welcome back to MALTEM CHAT: <span><i>{{ user.firstname }}</i></span></h1>
     <div class='panel panel-primary'>
         <div class='panel-heading'>
             <h3 class='panel-title'>Last messages</h3>
@@ -10,8 +10,8 @@
             {% for message in messages %}
                 <p>
                     <span><b>{{ message.user.pseudo }}</b></span>:
-                    <span>{{ message }}</span>-
-                    <span><b>{{ message.createdAt | date('dd/MM/yyyy h:i:s') }}</b></span>
+                    <span>{{ message.message }}</span>-
+                    <span><b>{{ message.createdAt | date('d/m/Y h:i:s A', 'Africa/Casablanca') }}</b></span>
                 </p>
             {% endfor %}
         </div>
@@ -25,7 +25,7 @@
             }) }}
                 <div class='row'>
                     <div class='col-md-4'>
-                        <b><i>{{ app.session.user.firstname }} :</i></b>
+                        <b><i>{{ user.pseudo }} :</i></b>
                     </div>
                     <div class='col-md-8'>
                         {{ form_label(form.message) }}

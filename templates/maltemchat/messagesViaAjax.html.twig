@@ -1,7 +1,7 @@
 {% for message in messages %}
     <p>
         <span><b>{{ message.user.pseudo }}</b></span>:
-        <span>{{ message }}</span>-
-        <span><b>{{ message.createdAt | date('dd/MM/yyyy h:i:s') }}</b></span>
+        <span>{{ message.message }}</span>-
+        <span><b>{{ message.createdAt | date('d/m/Y h:i:s A', 'Africa/Casablanca') }}</b></span>
     </p>
 {% endfor %}

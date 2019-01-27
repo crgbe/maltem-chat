@@ -49,24 +49,26 @@ class ChatController extends AbstractController
     public function newAction(Request $request){
         $session = new Session();
         $message = new Message();
-        $message->setUser($session->get('user'));
+        $userId = $session->get('userId');
+
+
+        $em = $this->getDoctrine()->getManager();
+        $user = $em->getRepository(User::class)->find($userId);
+
+        $message->setUser($user);
 
         $form = $this->createForm(MessageType::class, $message);
 
         $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
 
+        if ($form->isSubmitted() && $form->isValid()) {
             $em->persist($message);
             $em->flush();
 
-            $this->redirectToRoute('chat_home');
         }
 
-        return $this->render('maltemchat/home.html.twig', [
-            'form' => $form->createView(),
-        ]);
+        return $this->redirectToRoute('chat_home');
     }
 
     /**

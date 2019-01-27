@@ -53,13 +53,13 @@ class UserController extends AbstractController
             $credentials = $form->getData();
 
             $em = $this->getDoctrine()->getManager();
-            $user = $em->getRepository(User::class)->findBy([
+            $user = $em->getRepository(User::class)->findOneBy([
                 'pseudo' => $credentials['pseudo'],
             ]);
 
             $session = new Session();
             $session->start();
-            $session->set('userId', $user['id']);
+            $session->set('userId', $user->getId());
 
             return $this->redirectToRoute('chat_home');
         }

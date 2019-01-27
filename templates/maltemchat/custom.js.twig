@@ -3,11 +3,12 @@ $(document).ready(function(){
 		if(e.which == 13){
 			$.ajax({
 				url: "{{ path('message_new') }}",
-				data: {
-					'form': {
-						'message': $('#message_message').val(),
-					},
-				},
+				data: $(this).closest('form').serialize(),
+				{#{#}
+					{#'form': {#}
+						{#'message': $('#message_message').val(),#}
+					{#},#}
+				{#},#}
 				method: 'POST',
 				success: function(){
 					refreshMessages();

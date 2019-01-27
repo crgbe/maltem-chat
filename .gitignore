@@ -12,5 +12,4 @@
 /.web-server-pid
 ###< symfony/web-server-bundle ###
 
-### phpstorm idea folder ###
 .idea
