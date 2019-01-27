@@ -4,11 +4,6 @@ $(document).ready(function(){
 			$.ajax({
 				url: "{{ path('message_new') }}",
 				data: $(this).closest('form').serialize(),
-				{#{#}
-					{#'form': {#}
-						{#'message': $('#message_message').val(),#}
-					{#},#}
-				{#},#}
 				method: 'POST',
 				success: function(){
 					refreshMessages();
@@ -31,5 +26,5 @@ $(document).ready(function(){
 
 	setInterval(function(){
 		refreshMessages();
-	}, 5000);
+	}, 3000);
 });

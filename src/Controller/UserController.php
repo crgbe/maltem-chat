@@ -57,6 +57,10 @@ class UserController extends AbstractController
                 'pseudo' => $credentials['pseudo'],
             ]);
 
+            if(!$user){
+                return $this->redirectToRoute('user_register');
+            }
+
             $session = new Session();
             $session->start();
             $session->set('userId', $user->getId());

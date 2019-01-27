@@ -26,6 +26,10 @@ class ChatController extends AbstractController
         $session = new Session();
         $userId = $session->get('userId');
 
+        if(!$session->get('userId')){
+           return $this->redirectToRoute('user_login');
+        }
+
         $em = $this->getDoctrine()->getManager();
         $message = new Message();
 
@@ -41,6 +45,7 @@ class ChatController extends AbstractController
             'form' => $form->createView(),
             'messages' => $messages,
         ]);
+
     }
 
     /**
