@@ -11,3 +11,8 @@ Vous serez directement redirigé vers la plateforme de chat
 2- En accédant à la la page localhost/user/login
 
 Vous pourrez vous connecter si vous aviez été au préalable enregistré sur la plateforme.
+
+
+
+
+Pour faciliter le lancement, vous pouvez importer le fichier DumpDataForStart.sql situé à la racine du répertoire.
